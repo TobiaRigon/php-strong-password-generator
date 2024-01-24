@@ -6,6 +6,21 @@
     <title>Document</title>
 </head>
 <body>
-    <h1>Hello world</h1>
+<form>
+        <input type="number" name="pwsLength">
+        <input type="submit" value="CHECK">
+    </form>
+
+
+    <?php
+
+    require_once __DIR__ . "/partials/functions.php";
+
+        
+        $pwsLength = $_GET["pwsLength"];
+        $randomPassword = generateRandomPassword($pwsLength);
+
+        echo "Generated Password: $randomPassword";
+    ?>
 </body>
 </html>
