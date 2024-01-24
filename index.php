@@ -4,23 +4,34 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
-</head>
-<body>
-<form>
-        <input type="number" name="pwsLength">
-        <input type="submit" value="CHECK">
-    </form>
 
 
     <?php
 
     require_once __DIR__ . "/partials/functions.php";
 
-        
-        $pwsLength = $_GET["pwsLength"];
-        $randomPassword = generateRandomPassword($pwsLength);
+    session_start();
 
-        echo "Generated Password: $randomPassword";
+    ?>
+
+</head>
+<body>
+<form>
+        <input type="number" name="pwsLength">
+        <input type="submit" value="GENERATE">
+    </form>
+
+
+    <?php
+        if(isset($_GET["pwsLength"])){
+            $pwsLength = $_GET["pwsLength"];
+            $randomPassword = generateRandomPassword($pwsLength);
+
+            // Salva la password nella sessione
+            $_SESSION["generatedPassword"] = $randomPassword;
+
+            header("Location: partials/password_page.php");
+        }
     ?>
 </body>
 </html>
